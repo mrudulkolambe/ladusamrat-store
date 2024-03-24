@@ -47,7 +47,7 @@ const OrderHistory = () => {
                     </thead>
                     <tbody>
                         {orders?.map((order, index) => {
-                            return <tr class="">
+                            return <tr class="" key={order.channel_order_id + index}>
                                 <td class="px-16 py-3">
                                     #{order.channel_order_id.slice(28)}
                                 </td>
