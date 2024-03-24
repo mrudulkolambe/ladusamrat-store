@@ -4,7 +4,22 @@ const pacifico = Pacifico({ subsets: ['latin'], weight: ["400"] })
 import Navbar from "@/Components/ReusableComponet/Navbar"
 import ProductListTabel from "@/Components/CartPageComponent/CartProducts"
 import Footer from "@/Components/ReusableComponet/Footer"
+import { useEffect, useState } from "react";
+import axios from "axios";
 const OrderHistory = () => {
+    const [orders, setOrders] = useState([])
+    useEffect(() => {
+        axios(`${process.env.NEXT_PUBLIC_BASE_URL}/order/customer`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("authToken")}`
+            }
+        })
+            .then((res) => {
+                setOrders(res.data.orders)
+            })
+    }, [])
+
     return (
         <>
             <Navbar />
@@ -17,34 +32,36 @@ const OrderHistory = () => {
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50  ">
                         <tr>
                             <th scope="col" class="px-16 py-3">
-                                Image
+                                Sr. no
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Product
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Qty
+                                Address
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Price
                             </th>
+                            <th scope="col" class="px-6 py-3">
+                                Date
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="">
-                            <td class="p-4">
-                                <img src="/Assets/dummy.png" class=" md:w-32 max-w-full max-h-full" alt="Apple Watch" />
-                            </td>
-                            <td class="px-6 py-4 font-semibold text-gray-900 ">
-                                Apple Watch
-                            </td>
-                            <td class="px-6 py-4">
-                                4
-                            </td>
-                            <td class="px-6 py-4 font-semibold text-gray-900">
-                                100
-                            </td>
-                        </tr>
+                        {orders?.map((order, index) => {
+                            return <tr class="">
+                                <td class="px-16 py-3">
+                                    #{order.channel_order_id.slice(28)}
+                                </td>
+                                <td class="px-6 py-3">
+                                    {order.customer_address}
+                                </td>
+                                <td class="px-6 py-3">
+                                    {order.total}
+                                </td>
+                                <td class="px-6 py-3">
+                                    {order.created_at}
+                                </td>
+                            </tr>
+                        })}
 
                     </tbody>
                 </table>

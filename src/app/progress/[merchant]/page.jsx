@@ -13,7 +13,7 @@ const PaymentProgressPage = () => {
 	  if(merchant){
 		axios(`${process.env.NEXT_PUBLIC_BASE_URL}/${merchant}`)
 		.then((res) => {
-			window.location.url = res.data.url
+			window.location.href = "https://ladusamrat-store.vercel.app?clear=yes"
 		})
 		.catch((err) => {
 			alert(err.message)
