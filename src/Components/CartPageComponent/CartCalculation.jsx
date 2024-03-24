@@ -103,14 +103,7 @@ const CartCalculation = () => {
                 }
             })
                 .then((res) => {
-                    console.log(res.data)
-                    if (!res.data.error) {
-                        // toast("Order placed successfully!");
-                        // emptyCart()
-                        // setTimeout(() => {
-                        //     window.location.href = "/"
-                        // }, 1000);
-                    }
+                    window.location.href = res.data.url
                 })
                 .catch((err) => {
                     console.log(err)
