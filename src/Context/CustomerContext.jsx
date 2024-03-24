@@ -1,5 +1,6 @@
 "use client"
 import axios from "axios";
+
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 
 
@@ -8,7 +9,7 @@ export const CustomerContext = createContext();
 const CustomerProvider = ({ children }) => {
     const [customerData, setCustomerData] = useState()
     const [customerToken, setCustomerToken] = useState()
-
+    
     useEffect(() => {
         if (localStorage.getItem('authToken')) {
             setCustomerToken(localStorage.getItem('authToken'))

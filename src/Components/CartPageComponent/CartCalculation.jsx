@@ -205,7 +205,6 @@ const CartCalculation = () => {
                             <button className="btn btn-danger m-2" onClick={() => emptyCart()}>
                                 Clear Cart
                             </button>
-                            <button className="btn btn-primary m-2">Pay Now</button>
                         </div>
 
                     </div>
@@ -227,7 +226,9 @@ const CartCalculation = () => {
                             <p className={nunito.className + " font-normal"}>Total:</p>
                             <p className={nunito.className + " font-semibold"}>{cartTotal + 30}</p>
                         </div>
-                        <button onClick={() => setModal(true)} type="button" class=" focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Checkout</button>
+                        <button onClick={() => {
+                            if (items.length !== 0) setModal(true)
+                        }} type="button" class=" focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Checkout</button>
                     </div>
 
                 </div>
