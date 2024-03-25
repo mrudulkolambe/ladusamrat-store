@@ -9,11 +9,11 @@ const Productcard = ({ product }) => {
     const router = useRouter()
     return (
         <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-md">
-            <Link href={`product/${product._id}`}>
+            <Link href={`/product/${product._id}`}>
                 <img class="p-8 rounded-t-lg h-64" src={product.image} alt="product image" />
             </Link>
             <div class="px-8 pb-5">
-                <Link href={`product/${product._id}`}>
+                <Link href={`/product/${product._id}`}>
                     <h2 class={nunito.className + " text-xl font-semibold cursor-pointer tracking-tight text-[#C21C20]"}>{product?.name}</h2>
                 </Link>
                 <p className={nunito.className + " font-semibold"}>
@@ -29,7 +29,7 @@ const Productcard = ({ product }) => {
                     >
                         Add to Cart
                     </button> */}
-                    <Link href={`product/${product._id}`} class="text-white bg-white focus:ring-4 focus:outline-none rounded-lg px-5 py-2.5 text-center border-2 border-red-700 shadow"><img src="/Assets/bag.png" /></Link>
+                    <Link href={`/product/${product._id}`} class="text-white bg-white focus:ring-4 focus:outline-none rounded-lg px-5 py-2.5 text-center border-2 border-red-700 shadow"><img src="/Assets/bag.png" /></Link>
                 </div>
             </div>
         </div>

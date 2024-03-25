@@ -41,7 +41,7 @@ const Navbar = () => {
                                             categories?.map((category) => {
                                                 return (
                                                     <li key={category._id}>
-                                                        <a href="/product" class={nunito.className + " block px-4 py-2 text-black"}>{category.category_name}</a>
+                                                        <Link href={`/category/${category._id}`} class={nunito.className + " block px-4 py-2 text-black"}>{category.category_name}</Link>
                                                     </li>
                                                 )
                                             })

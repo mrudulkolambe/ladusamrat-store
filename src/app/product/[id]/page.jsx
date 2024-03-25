@@ -6,8 +6,12 @@ import Footer from "@/Components/ReusableComponet/Footer"
 import { useParams } from "next/navigation"
 import { useCallback, useEffect, useMemo, useState } from "react"
 import axios from "axios"
+import { useProductContext } from "@/Context/ProductContext"
+
+
 const SingleProduct = () => {
     const { id } = useParams();
+    const { productData } = useProductContext()
     const [productDetails, setProductDetails] = useState();
     useEffect(() => {
         axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/product/${id}`)
@@ -20,8 +24,10 @@ const SingleProduct = () => {
     return (
         <>
             <Navbar />
-            <ProductViewSection key={productDetails?.toString()} product={productDetails}/>
-            <ProductListSection />
+            <ProductViewSection key={productDetails?.toString()} product={productDetails} />
+            <ProductListSection productData={productData.filter((product) => {
+                return product._id !== id
+            })} />
             <Footer />
         </>
     )
