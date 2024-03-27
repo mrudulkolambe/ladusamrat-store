@@ -37,7 +37,7 @@ const ProductViewSection = ({ product }) => {
                     </h2>
                     <p className="text-lg font-bold">Rs. {product?.price}</p>
                     <div>
-                        <h4 className="font-semibold">Size:</h4>
+                        <h4 className="font-semibold">Weight:</h4>
                         <div>
                             <button type="button" onClick={() => setVariant({ weight: 250, variantID: product?._id, variantName: "250gm", id: `1__${product?._id}`, price: product.price })} className={variant.variantName == "250gm" ? "text-white border-2 border-red-700 bg-red-700 font-medium rounded-2xl text-sm px-5 py-2.5 me-2 mb-2" : "text-black border-2 border-red-700 bg-white font-medium rounded-2xl text-sm px-5 py-2.5 me-2 mb-2"} >250gm</button>
                             <button type="button" onClick={() => setVariant({ weight: 250 * 2, variantID: product?._id, variantName: "500gm", id: `2__${product?._id}`, price: product.price * 2 })} className={variant.variantName == "500gm" ? "text-white border-2 border-red-700 bg-red-700 font-medium rounded-2xl text-sm px-5 py-2.5 me-2 mb-2" : "text-black border-2 border-red-700 bg-white font-medium rounded-2xl text-sm px-5 py-2.5 me-2 mb-2"} >500gm</button>
