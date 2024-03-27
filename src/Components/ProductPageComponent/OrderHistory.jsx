@@ -16,6 +16,7 @@ const OrderHistory = () => {
             }
         })
             .then((res) => {
+                console.log(res.data.orders)
                 setOrders(res.data.orders)
             })
     }, [])
@@ -31,34 +32,40 @@ const OrderHistory = () => {
                 <table class="w-full overflow-scroll text-sm text-left rtl:text-right text-gray-500 rounded-md ">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50  ">
                         <tr>
-                            <th scope="col" class="px-16 py-3">
+                            <th scope="col" class="lg:px-16 px-2 py-3">
                                 Sr. no
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="lg:px-6 px-2 py-3">
                                 Address
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="lg:px-6 px-2 py-3">
                                 Price
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="lg:px-6 px-2 py-3">
                                 Date
+                            </th>
+                            <th scope="col" class="lg:px-6 px-2 py-3">
+                                Status
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         {orders?.map((order, index) => {
                             return <tr class="" key={order.channel_order_id + index}>
-                                <td class="px-16 py-3">
+                                <td class="lg:px-16 px-2 py-3">
                                     #{order.channel_order_id.slice(28)}
                                 </td>
-                                <td class="px-6 py-3">
+                                <td class="lg:px-6 px-2 py-3">
                                     {order.customer_address}
                                 </td>
-                                <td class="px-6 py-3">
+                                <td class="lg:px-6 px-2 py-3">
                                     {order.total}
                                 </td>
-                                <td class="px-6 py-3">
+                                <td class="lg:px-6 px-2 py-3">
                                     {order.created_at}
+                                </td>
+                                <td class="lg:px-6 px-2 py-3">
+                                    {order.status}
                                 </td>
                             </tr>
                         })}

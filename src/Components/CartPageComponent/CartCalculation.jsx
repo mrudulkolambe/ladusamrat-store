@@ -4,14 +4,14 @@ const nunito = Nunito({ subsets: ['latin'], weight: ["variable"] })
 import ProductListTabel from "./CartProducts"
 import { useCart } from "react-use-cart";
 import { v4 as uuidv4 } from 'uuid';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Check, X } from "lucide-react";
-import { useProductContext } from "@/Context/ProductContext";
 import axios from "axios";
 import { toast } from "sonner";
+import { useCustomerContext } from "@/Context/CustomerContext";
 
 const CartCalculation = () => {
-    const { productData } = useProductContext();
+    const { customerData } = useCustomerContext();
     const [paymentMethod, setPaymentMethod] = useState("cod");
     const initialState = {
         name: "",
@@ -26,6 +26,13 @@ const CartCalculation = () => {
 
     const [checkoutFormState, setCheckoutFormState] = useState(initialState);
 
+    useEffect(() => {
+        setCheckoutFormState({
+            billing_email: customerData?.email,
+            billing_phone: customerData?.phoneNo,
+            name: customerData?.name,
+        })
+    }, [customerData]);
 
     const handleCheckoutForm = (e) => {
         console.log(e.target.value)
@@ -150,7 +157,7 @@ const CartCalculation = () => {
                                         return (
                                             <tr class="" key={index}>
                                                 <td class="p-4">
-                                                    <img src={item.image} class="w-16 md:w-32 max-w-full max-h-full" alt="Apple Watch" />
+                                                    <img src={item.image} class="w-16 h-20 object-cover md:w-32 max-w-full max-h-full" alt="Apple Watch" />
                                                 </td>
                                                 <td class="px-6 py-4 font-semibold text-gray-900 ">
                                                     {item.title}
@@ -235,8 +242,10 @@ const CartCalculation = () => {
                         <div className="flex flex-col">
                             <label htmlFor="name" className="text-sm font-extrabold mb-1">Full name: </label>
                             <input
+                                value={checkoutFormState.name}
                                 onChange={handleCheckoutForm}
                                 type="text"
+                                required
                                 id="name"
                                 name="name"
                                 placeholder="Full Name"
@@ -246,9 +255,11 @@ const CartCalculation = () => {
                         <div className="flex flex-col">
                             <label htmlFor="billing_email" className="text-sm font-extrabold mb-1">Email: </label>
                             <input
+                                value={checkoutFormState.billing_email}
                                 onChange={handleCheckoutForm}
                                 type="text"
                                 id="billing_email"
+                                required
                                 name="billing_email"
                                 placeholder="Email"
                                 className={nunito.className + " block w-full py-2 text-sm px-5 shadow-md border border-[rgb(194,28,32)] rounded-lg bg-gray-50  focus:border-[#C21C20] focus:outline-none sm:text-sm sm:leading-6"}
@@ -257,8 +268,10 @@ const CartCalculation = () => {
                         <div className="flex flex-col">
                             <label htmlFor="billing_phone" className="text-sm font-extrabold mb-1">Phone Number: </label>
                             <input
+                                value={checkoutFormState.billing_phone}
                                 onChange={handleCheckoutForm}
                                 type="text"
+                                required
                                 id="billing_phone"
                                 name="billing_phone"
                                 placeholder="Phone number"
@@ -282,6 +295,7 @@ const CartCalculation = () => {
                                 onChange={handleCheckoutForm}
                                 type="text"
                                 id="billing_address"
+                                required
                                 name="billing_address"
                                 placeholder="Shipping address"
                                 className={nunito.className + " block w-full py-2 text-sm px-5 shadow-md border border-[rgb(194,28,32)] rounded-lg bg-gray-50  focus:border-[#C21C20] focus:outline-none sm:text-sm sm:leading-6"}
@@ -292,6 +306,7 @@ const CartCalculation = () => {
                             <input
                                 onChange={handleCheckoutForm}
                                 type="text"
+                                required
                                 id="billing_city"
                                 name="billing_city"
                                 placeholder="City"
@@ -303,6 +318,7 @@ const CartCalculation = () => {
                             <input
                                 onChange={handleCheckoutForm}
                                 type="text"
+                                required
                                 id="billing_state"
                                 name="billing_state"
                                 placeholder="State"
@@ -312,6 +328,7 @@ const CartCalculation = () => {
                         <div className="flex flex-col">
                             <label htmlFor="name" className="text-sm font-bold mb-1">Pincode: </label>
                             <input
+                                required
                                 onChange={handleCheckoutForm}
                                 type="text"
                                 id="billing_pincode"
