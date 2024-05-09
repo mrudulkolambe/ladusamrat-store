@@ -11,7 +11,17 @@ import { useProductContext } from "@/Context/ProductContext"
 
 const SingleProduct = () => {
     const { id } = useParams();
-    const { productData } = useProductContext()
+    const [productData, setProductData] = useState([])
+
+    useEffect(() => {
+
+        axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/product/`)
+            .then((res) => {
+                setProductData(res.data.product)
+            }).catch((error) => {
+                console.log("Error===> ", error)
+            })
+    }, [])
     const [productDetails, setProductDetails] = useState();
     useEffect(() => {
         axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/product/${id}`)
